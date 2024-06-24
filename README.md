@@ -73,13 +73,13 @@ Note that the data includes a `res` field that contains the resource name of the
 
 ## Modified Files
 
-I had to slightly modify `mapmanager` to add information about the map name in the spawn: [link](resources\[managers]\mapmanager\mapmanager_shared.lua#52)
+I had to slightly modify `mapmanager` to add information about the map name in the spawn: [link](resources/[managers]/mapmanager/mapmanager_shared.lua#52)
 
-I also modified `spawnmanager` to check spawn information and identify the bug: [link](resources\[managers]\spawnmanager\spawnmanager.lua#4)
+I also modified `spawnmanager` to check spawn information and identify the bug: [link](resources/[managers]/spawnmanager/spawnmanager.lua#4)
 
-The reproduction scenario was added to `basicgamemode`: [link](resources\[gamemodes]\basic-gamemode\basic_server.lua)
+The reproduction scenario was added to `basicgamemode`: [link](resources/[gamemodes]/basic-gamemode/basic_server.lua)
 
 Additionally, I changed `server.cfg` to ensure `basic-gamemode` starts when the server starts: [link](server.cfg#28)
 
-You can get more detailed information in commit 2ba801c9fb45977183cd9c6002392b48bdaf87d6
+You can get more detailed information in commit [2ba801c9fb45977183cd9c6002392b48bdaf87d6](https://github.com/draobrehtom/redm-mapmanager-bug/commit/2ba801c9fb45977183cd9c6002392b48bdaf87d6)
 
