@@ -1,6 +1,6 @@
 # Bug in Mapmanager (Ghost Spawns) | FiveM
 
-When switching maps, old spawns are not removed and new one not added. For example, instead of 2 new spawns, there will be 2 old spawns.
+When switching maps, old spawns are not removed. For example, instead of 2 spawns, there may be 4.
 
 
 ## Installation / Bug reproduction
@@ -48,10 +48,28 @@ Below is the content of the spawnPoints variable from spawnmanager/spawnmanager.
         "model": 225514697,
         "idx": 2
     },
+    {
+        "heading": 0,
+        "res": "redm-map-1", // current map
+        "z": 118.0871,
+        "y": 793.4041,
+        "x": 111.8491,
+        "model": 11966224,
+        "idx": 3
+    },
+    {
+        "heading": 0,
+        "res": "redm-map-1", // current map
+        "z": 118.0871,
+        "y": 793.4041,
+        "x": 111.8491,
+        "model": 225514697,
+        "idx": 4
+    }
 ]
 ```
 
-Note that the data includes a `res` field that contains the resource name of the map. The data shows value **"redm-map-3"**. This indicates that spawns are from previous map and new spawns were not added.
+Note that the data includes a `res` field that contains the resource name of the map. The data shows values **"redm-map-1"** and **"redm-map-3"**. This indicates that spawns from two different resources are present simultaneously. Since the `mapmanager` logic can only run one resource of type `map` at a time, this means the logic is broken.
 
 ## Modified Files
 
