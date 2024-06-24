@@ -3,7 +3,7 @@
 
 version '1.0.0'
 author 'Cfx.re <root@cfx.re>'
-description 'Example spawn points for FiveM with a "skater" model.'
+description 'Example spawn points for RedM.'
 repository 'https://github.com/citizenfx/cfx-server-data'
 
 resource_type 'map' { gameTypes = { ['basic-gamemode'] = true } }
@@ -11,4 +11,6 @@ resource_type 'map' { gameTypes = { ['basic-gamemode'] = true } }
 map 'map.lua'
 
 fx_version 'adamant'
-game 'gta5'
+game 'rdr3'
+
+rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'

@@ -1,6 +1,32 @@
 -- in-memory spawnpoint array for this script execution instance
 local spawnPoints = {}
 
+----------
+local currentMap = nil
+AddEventHandler('onClientMapStart', function(res)
+    currentMap = res
+end)
+
+local function checkSpawns()
+    print('Current map', currentMap)
+    print('Current map spawnoints', #spawnPoints)
+
+    for k,v in ipairs(spawnPoints) do
+        if v.res ~= currentMap then
+            error('Spawn not from current map:\n' .. json.encode(spawnPoints))
+        end
+    end
+end
+
+AddEventHandler('playerSpawned', function()
+    checkSpawns()
+end)
+
+RegisterCommand('check-spawns', function()
+    checkSpawns()
+end, false)
+----------
+
 -- auto-spawn enabled flag
 local autoSpawnEnabled = false
 local autoSpawnCallback
@@ -8,7 +34,7 @@ local autoSpawnCallback
 -- support for mapmanager maps
 AddEventHandler('getMapDirectives', function(add)
     -- call the remote callback
-    add('spawnpoint', function(state, model)
+    add('spawnpoint', function(state, res, model)
         -- return another callback to pass coordinates and so on (as such syntax would be [spawnpoint 'model' { options/coords }])
         return function(opts)
             local x, y, z, heading
@@ -36,7 +62,8 @@ AddEventHandler('getMapDirectives', function(add)
                 addSpawnPoint({
                     x = x, y = y, z = z,
                     heading = heading,
-                    model = model
+                    model = model,
+                    res = res, --
                 })
 
                 -- recalculate the model for storage

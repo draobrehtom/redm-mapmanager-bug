@@ -49,7 +49,7 @@ function parseMap(file, owningResource)
                 state[k] = v
             end
 
-            local result = cb(state, ...)
+            local result = cb(state, owningResource, ...)
             local args = table.pack(...)
 
             table.insert(undoCallbacks[owningResource], function()
