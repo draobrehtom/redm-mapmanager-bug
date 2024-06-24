@@ -14,6 +14,7 @@ AddEventHandler('playerJoining', function()
     -- Change the map
     exports['mapmanager']:roundEnded()
 end)
+```
 
 Below is the content of the spawnPoints variable from spawnmanager/spawnmanager.lua at the moment the bug occurs.
 
