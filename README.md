@@ -69,7 +69,7 @@ Below is the content of the spawnPoints variable from spawnmanager/spawnmanager.
 ]
 ```
 
-Note that the data includes a `res` field that contains the resource name of the map. The data shows values **"redm-map-1"** and **"redm-map-3"**. This indicates that spawns from two different resources are present simultaneously. Since the `mapmanager` logic can only run one resource of type `map` at a time, this means the logic is broken.
+Note that the data includes a `res` field that contains the resource name of the map. The data shows values **"redm-map-3"** (previous map) and **"redm-map-1"** (current map). This indicates that spawns from two different resources are present simultaneously. Since the `mapmanager` logic can only run one resource of type `map` at a time, this means the logic is broken.
 
 ## Modified Files
 
