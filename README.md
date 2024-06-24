@@ -1,22 +1,21 @@
-# Bug in mapmanager (ghost spawns)
+# Bug in Mapmanager (Ghost Spawns)
 
-При смене карты не удаляются старые спауны. Например, вместо 2-х спаунов может присутствовать 4-ре. 
+When switching maps, old spawns are not removed. For example, instead of 2 spawns, there may be 4.
 
-## Описание и воспроизведение ошибки
+## Description and Reproduction of the Bug
 
-Ошибка происходит только у тех игроков, которые подключаются к серверу во время смены карты. Ниже представлен сценарий воспроизводства бага.
+This bug occurs only for players who connect to the server during the map change. Below is the scenario for reproducing the bug.
 
 ```lua
 -- server.lua
 AddEventHandler('playerJoining', function()
-    -- Игрок подключается
+    -- Player connects
 
-    -- Меняем карту
+    -- Change the map
     exports['mapmanager']:roundEnded()
 end)
-```
 
-Ниже представлены содержимое переменной `spawnPoints` из `spawnmanager/spawnmanager.lua` в момент установки факта ошибки.
+Below is the content of the spawnPoints variable from spawnmanager/spawnmanager.lua at the moment the bug occurs.
 
 ```json
 [
@@ -59,19 +58,17 @@ end)
 ]
 ```
 
-Обратите внимание, что в данных есть поле `res` которое содержит имя карты (resource name). В данных указаны значения **"redm-map-1"** и **"redm-map-3"**. Это говорит о том, что одновременно содержатся спауны из двух различных ресурсов, а т.к. в логике `mapmanager` может быть запущен только один ресурс типа `map`, то значит логика нарушена.
+Note that the data includes a `res` field that contains the resource name of the map. The data shows values **"redm-map-1"** and **"redm-map-3"**. This indicates that spawns from two different resources are present simultaneously. Since the `mapmanager` logic can only run one resource of type `map` at a time, this means the logic is broken.
 
-## Модифицированные файлы
+## Modified Files
 
-Мне пришлось немного модифицировать `mapmanager`, чтобы добавить информацию о названии карты в спаун: [link](resources\[managers]\mapmanager\mapmanager_shared.lua#52)
+I had to slightly modify `mapmanager` to add information about the map name in the spawn: [link](resources\[managers]\mapmanager\mapmanager_shared.lua#52)
 
-Так-же модифицирован `spawnmanager`, чтобы проверять информацию о спаунах и идентифицировать ошибку:
-[link](resources\[managers]\spawnmanager\spawnmanager.lua#4)
+I also modified `spawnmanager` to check spawn information and identify the bug: [link](resources\[managers]\spawnmanager\spawnmanager.lua#4)
 
-Сценарий воспроизводства был добавлен в `basicgamemode`:
-[link](resources\[gamemodes]\basic-gamemode\basic_server.lua)
+The reproduction scenario was added to `basicgamemode`: [link](resources\[gamemodes]\basic-gamemode\basic_server.lua)
 
-А так-же изменён `server.cfg`, чтобы `basic-gamemode` запускался при старте сервере:
-[link](server.cfg#28)
+Additionally, I changed `server.cfg` to ensure `basic-gamemode` starts when the server starts: [link](server.cfg#28)
 
-Более подробную информацию вы можете получить в коммите 2ba801c9fb45977183cd9c6002392b48bdaf87d6
+You can get more detailed information in commit 2ba801c9fb45977183cd9c6002392b48bdaf87d6
+
