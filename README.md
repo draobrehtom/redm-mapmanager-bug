@@ -2,7 +2,17 @@
 
 When switching maps, old spawns are not removed. For example, instead of 2 spawns, there may be 4.
 
-## Description and Reproduction of the Bug
+
+## Installation / Bug reproduction
+
+1. Clone repository into your server data folder.
+2. Edit `server.cfg` to set up your license key
+3. Run server and connect
+4. Wait for first spawn and then press **F8** to see an error like **"Spawn not from current map:..."** 
+5. If you see the error in client console then bug is reproduced.
+
+
+## Detailed Description of Reproduction of the Bug
 
 This bug occurs only for players who connect to the server during the map change. Below is the scenario for reproducing the bug.
 
