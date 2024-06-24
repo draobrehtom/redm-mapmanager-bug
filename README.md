@@ -1,4 +1,4 @@
-# Bug in Mapmanager (Ghost Spawns)
+# Bug in Mapmanager (Ghost Spawns) | RedM
 
 When switching maps, old spawns are not removed. For example, instead of 2 spawns, there may be 4.
 
